@@ -21,7 +21,7 @@ jobs:
           node-version: 22
 
       - name: Set up Java 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 21
@@ -57,7 +57,7 @@ jobs:
           ./gradlew bundleRelease --no-daemon
 
       - name: Upload .aab artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: app-release-aab
           path: android/app/build/outputs/bundle/release/*.aab
