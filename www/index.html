@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Word Coach</title>
+<meta name="description" content="Word Coach: a fast word game. Two answers, one is right. Climb 9000 levels!">
+<meta name="theme-color" content="#6d5efc">
+<link rel="icon" href="icons/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="load"><svg class="lgem"><use href="#iRd"/></svg><div class="lt">WORD COACH</div><div class="lbar"><i></i></div><div class="ltip" id="ltip"></div></div>
+<div id="bg"><div class="z z0 on"></div><div class="z z1"></div><div class="z z2"></div><div class="z z3"></div><div class="z z4"></div><div class="z z5"></div><div class="z z6"></div><div class="z z7"></div></div>
+<main class="wrap">
+<section id="home" hidden>
+ <div class="pbar"><button id="avBtn" class="av" aria-label="Mascots"></button><div style="flex:1;min-width:0"><div class="sub" id="pInfo"></div><div class="bar" style="margin:4px 0 0"><i id="xpFill"></i></div></div><div id="mdl"></div></div>
+ <div class="wal" id="wal"></div><div class="note" id="adfreeNote" hidden>✨ Ad-free is active</div>
+ <h1>WORD<br>COACH</h1>
+ <div class="card">
+  <div class="tag">Choose difficulty</div>
+  <div class="diffs" id="diffs">
+   <button data-d="0">😊 Easy<small>❤️❤️❤️</small></button>
+   <button data-d="1">😎 Medium<small>❤️❤️</small></button>
+   <button data-d="2">👑 Legend<small>❤️</small></button>
+  </div>
+  <button class="primary" id="play">▶ PLAY</button>
+  <p class="note" id="best"></p>
+ </div>
+ <div class="row"><button id="drBtn"></button><button id="dcBtn"></button></div>
+ <div class="row" style="margin-top:10px"><button id="shopBtn">🛒 Shop</button><button id="lbBtn">🏆 Ranks</button><button id="goalBtn">🎯 Goals</button><button id="setBtn" aria-label="Settings">⚙️</button></div>
+ <div class="adslot" id="adHome" data-slot="home"></div>
+</section>
+<section id="game" hidden>
+ <button class="back" id="quitBtn" style="width:auto;padding:0 16px;margin-bottom:8px" aria-label="Back to home">← Home</button>
+ <div class="card" id="hudCard">
+  <div class="hud"><span id="lvl">Lv 1</span><span id="score">0</span><span id="hearts"></span></div>
+  <div class="bar"><i id="prog"></i></div>
+  <div class="sub"><span id="streak">Streak 0</span><span id="mult">×1</span><span id="qn">Q1</span></div>
+ </div>
+ <div class="tb"><i id="tfill"></i></div>
+ <div class="card"><div class="tag" id="tag"></div><div class="q" id="q"></div></div>
+ <div class="opts" id="opts"></div>
+ <div class="pus" id="pus"></div>
+ <div class="mrow"><div class="masbox" id="masBox"></div><div class="msg" id="msg"></div></div>
+ <div class="adslot" id="adGame" data-slot="game"></div>
+</section>
+<section id="over" hidden>
+ <button class="back" id="overBack" style="width:auto;padding:0 16px;margin-bottom:8px" aria-label="Back to home">← Home</button>
+ <div class="card center"><div class="tag">Game over</div><div class="big" id="fs">0</div>
+  <p id="fd" style="margin:4px 0"></p><p class="note" id="fst"></p><p class="note" id="nudge" style="font-weight:700"></p></div>
+ <button class="primary" id="revive" style="margin-bottom:10px">🎬 Watch ad to try again (+1 ❤️)</button>
+ <button class="primary" id="again" style="margin-bottom:10px">🔁 One more round</button>
+ <div class="row"><button id="lbBtn2">🏆 Ranks</button><button id="shareBtn">📤 Share</button><button id="revBtn">📖 Review</button></div>
+ <button class="ghost" id="homeBtn" style="margin-top:10px">🏠 Home</button>
+ <div class="adslot" id="adOver" data-slot="result"></div>
+</section>
+</main>
+<div id="flash" class="flash"></div><div id="combo"></div><div id="toast"></div>
+
+<div id="lbModal" class="modal" hidden><div class="card"><div class="mh"><button class="back" data-back aria-label="Back">←</button><h2>🏆 Best runs</h2><span></span></div>
+ <div id="lbList"></div><p class="note" id="lbNote"></p><button class="ghost" data-close>Close</button></div></div>
+<div id="setModal" class="modal" hidden><div class="card"><div class="mh"><button class="back" data-back aria-label="Back">←</button><h2>⚙️ Settings</h2><span></span></div>
+ <div class="set">Game modes (100)<button id="modesBtn">Open</button></div>
+ <div class="set">Sound effects<button id="sSfx"></button></div>
+ <div class="set">Music<button id="sMus"></button></div>
+ <div class="set">Volume<input type="range" id="sVol" min="0" max="1" step=".05"></div>
+ <div class="set">Vibration<button id="sVib"></button></div>
+ <div class="set">Light / dark<button id="sTheme"></button></div>
+ <div class="set">Remove ads<button id="sAds"></button></div>
+ <div class="set">Question history<button id="sReset">Reset</button></div>
+ <p class="note"><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></p>
+ <button class="ghost" data-close style="margin-top:12px">Done</button></div></div>
+<div id="drModal" class="modal" hidden><div class="card"><div class="mh"><button class="back" data-back aria-label="Back">←</button><h2>📅 Daily Reward</h2><span></span></div>
+ <div class="center" id="drToday" style="font-weight:700"></div>
+ <div class="row" style="margin:8px 0"><button id="drPrev" aria-label="Previous days">‹</button><button id="drNow">Today</button><button id="drNext" aria-label="Next days">›</button></div>
+ <div class="tag" id="drPg" style="margin-bottom:6px"></div><div class="drg" id="drGrid"></div><p class="note" id="drNote"></p>
+ <button class="primary" id="drClaim">Claim</button><button class="ghost" data-close style="margin-top:10px">Close</button></div></div>
+<div id="shopModal" class="modal" hidden><div class="card"><div class="mh"><button class="back" data-back aria-label="Back">←</button><h2>🛒 Shop</h2><span></span></div>
+ <div class="center" style="font-weight:700" id="shopWal"></div>
+ <div class="row" style="margin:8px 0"><button id="adRed"></button><button id="adDia"></button></div>
+ <div class="tabs" id="tabs"><button data-t="t" aria-label="Themes">🎨</button><button data-t="a" aria-label="Mascots">🙂</button><button data-t="p" aria-label="Power-ups">⚡</button><button data-t="s" aria-label="Special items">🔓</button><button data-t="m" aria-label="Red diamonds and no ads">💳</button></div>
+ <div class="tag" id="tabName"></div><div id="shopList"></div><p class="note" id="shopNote"></p>
+ <div class="adslot" id="adShop" data-slot="result"></div>
+ <button class="ghost" data-close style="margin-top:8px">Close</button></div></div>
+<div id="mModal" class="modal" hidden><div class="card"><div class="mh"><button class="back" data-back aria-label="Back">←</button><h2>Game Modes</h2><span></span></div><div id="mBody"></div><button class="ghost" data-close style="margin-top:10px">Close</button></div></div>
+<div id="xModal" class="modal" hidden><div class="card"><div class="mh"><button class="back" data-back aria-label="Back">←</button><h2 id="xTitle"></h2><span></span></div><div id="xBody"></div></div></div>
+<div id="qModal" class="modal" hidden><div class="card"><div class="mh"><button class="back" data-back aria-label="Keep playing">←</button><h2>Leave run?</h2><span></span></div>
+ <p class="center" style="font-weight:600">Your score so far will be saved.</p>
+ <div class="row"><button id="qStay">Keep playing</button><button id="qGo" class="primary" style="font-size:16px">Leave</button></div></div></div>
+<div id="adModal" class="modal" hidden style="z-index:80"><div class="card center"><div class="mh"><span></span><div class="tag">Rewarded ad · optional</div><span></span></div>
+ <div class="adart"><svg class="ic big"><use href="#iGift"/></svg></div><p id="adTxt" style="font-weight:600">Sample ad</p>
+ <div class="bar"><i id="adBar"></i></div>
+ <button class="primary" id="adClaim" disabled>Wait…</button>
+ <button class="ghost" id="adClose" style="margin-top:10px">← Back</button></div></div>
+<div id="popModal" class="modal" hidden><div class="card"><div class="tag" style="margin-bottom:8px">Advertisement</div><div id="popBox"></div><button class="primary" id="popClose" style="font-size:18px" disabled>Close</button></div></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="gR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9aa9"/><stop offset=".5" stop-color="#e11d48"/><stop offset="1" stop-color="#7f0a24"/></linearGradient>
+<linearGradient id="gB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b5ecff"/><stop offset=".5" stop-color="#2f7dff"/><stop offset="1" stop-color="#1a2f9e"/></linearGradient>
+<radialGradient id="gG" cx=".35" cy=".3"><stop offset="0" stop-color="#fff3a0"/><stop offset=".6" stop-color="#f5b400"/><stop offset="1" stop-color="#a86400"/></radialGradient>
+<linearGradient id="gT0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd9b3"/><stop offset=".5" stop-color="#cd7f32"/><stop offset="1" stop-color="#6b3f1a"/></linearGradient><linearGradient id="gT1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#c4ccd8"/><stop offset="1" stop-color="#6b7585"/></linearGradient><linearGradient id="gT2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3a0"/><stop offset=".5" stop-color="#f5b400"/><stop offset="1" stop-color="#a86400"/></linearGradient><linearGradient id="gT3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4fdff"/><stop offset=".5" stop-color="#8fd3e6"/><stop offset="1" stop-color="#3f7487"/></linearGradient><linearGradient id="gT4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e3f8ff"/><stop offset=".5" stop-color="#4ab3ff"/><stop offset="1" stop-color="#1a4fb8"/></linearGradient><linearGradient id="gT5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd6f6"/><stop offset=".5" stop-color="#c44bd8"/><stop offset="1" stop-color="#5a1a8c"/></linearGradient><linearGradient id="gT6" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffc2c2"/><stop offset=".5" stop-color="#e11d48"/><stop offset="1" stop-color="#5c0a22"/></linearGradient><symbol id="iRd" viewBox="0 0 32 32"><path d="M9 4h14l7 8-14 17L2 12z" fill="url(#gR)"/><path d="M9 4l3 8H2z" fill="#fff" fill-opacity=".38"/><path d="M9 4h14l-3 8h-8z" fill="#fff" fill-opacity=".18"/><path d="M23 4l7 8H20z" fill="#000" fill-opacity=".22"/><path d="M2 12h10l4 17z" fill="#000" fill-opacity=".08"/><path d="M12 12h8l-4 17z" fill="#fff" fill-opacity=".26"/><path d="M20 12h10l-14 17z" fill="#000" fill-opacity=".3"/><path d="M9 4h14l7 8-14 17L2 12z" fill="none" stroke="#4a0014" stroke-width=".9" stroke-linejoin="round"/><path d="M2 12h28M9 4l3 8 4-8 4 8 3-8M12 12l4 17 4-17" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width=".5"/><path d="M6 1.5v4M4 3.5h4" stroke="#fff" stroke-width="1" stroke-linecap="round"/></symbol>
+<symbol id="iDi" viewBox="0 0 32 32"><path d="M9 4h14l7 8-14 17L2 12z" fill="url(#gB)"/><path d="M9 4l3 8H2z" fill="#fff" fill-opacity=".38"/><path d="M9 4h14l-3 8h-8z" fill="#fff" fill-opacity=".18"/><path d="M23 4l7 8H20z" fill="#000" fill-opacity=".22"/><path d="M2 12h10l4 17z" fill="#000" fill-opacity=".08"/><path d="M12 12h8l-4 17z" fill="#fff" fill-opacity=".26"/><path d="M20 12h10l-14 17z" fill="#000" fill-opacity=".3"/><path d="M9 4h14l7 8-14 17L2 12z" fill="none" stroke="#0e1f6b" stroke-width=".9" stroke-linejoin="round"/><path d="M2 12h28M9 4l3 8 4-8 4 8 3-8M12 12l4 17 4-17" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width=".5"/><path d="M6 1.5v4M4 3.5h4" stroke="#fff" stroke-width="1" stroke-linecap="round"/></symbol>
+<symbol id="iCo" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="url(#gG)" stroke="#8a5200" stroke-width="1.2"/><circle cx="16" cy="16" r="10" fill="none" stroke="#fff3a0" stroke-opacity=".8" stroke-width="1.2"/><path d="M16 9l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7z" fill="#b87400" fill-opacity=".85"/></symbol>
+<symbol id="iGift" viewBox="0 0 64 64"><rect x="8" y="26" width="48" height="32" rx="3" fill="#ef4444"/><rect x="5" y="20" width="54" height="10" rx="3" fill="#f87171"/><rect x="28" y="20" width="8" height="38" fill="#fbbf24"/><path d="M32 20C24 6 10 14 20 20zM32 20C40 6 54 14 44 20z" fill="#fbbf24" stroke="#b45309" stroke-width="1.5"/></symbol>
+</defs></svg>
+<script src="js/config.js"></script>
+<script src="js/core.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/modes.js"></script>
+<script src="js/content.js"></script>
+<script src="js/ads.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
